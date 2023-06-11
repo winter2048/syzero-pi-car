@@ -1,0 +1,37 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Official
+
+# run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+
+on: 
+  push:
+    branches: [ "master", "dev" ]
+
+env:
+  GB_NUGET_TOKEN: ${{secrets.GB_NUGET_TOKEN}}
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore ./Service/SyZero.PiCar.sln
+
+      - name: Build
+        run: dotnet build --configuration Release ./Service/SyZero.PiCar.sln --no-restore
+
+      - name: Upload package
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: |
+            ./Service/SyZero.PiCar.Service/bin/*

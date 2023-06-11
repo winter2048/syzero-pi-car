@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyZero.MotorDriver", "SyZero.MotorDriver\SyZero.MotorDriver.csproj", "{6DFBEAE3-9434-4AA7-83FA-9589A89A7205}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyZero.PiCar.Service", "SyZero.PiCar.Service\SyZero.PiCar.Service.csproj", "{F2FD4AC6-C0E3-4FA8-825B-537F3FE19982}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DFBEAE3-9434-4AA7-83FA-9589A89A7205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DFBEAE3-9434-4AA7-83FA-9589A89A7205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DFBEAE3-9434-4AA7-83FA-9589A89A7205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DFBEAE3-9434-4AA7-83FA-9589A89A7205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2FD4AC6-C0E3-4FA8-825B-537F3FE19982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2FD4AC6-C0E3-4FA8-825B-537F3FE19982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2FD4AC6-C0E3-4FA8-825B-537F3FE19982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2FD4AC6-C0E3-4FA8-825B-537F3FE19982}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7668E53B-AA87-498A-A3C0-6B7888DDCEFB}
+	EndGlobalSection
+EndGlobal
