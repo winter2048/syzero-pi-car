@@ -20,6 +20,8 @@ import {MotorHAT} from "../../../utils/constant";
 import {MecanumWheel} from "../../../utils/wheel/MecanumWheel";
 import {Wheel} from "../../../utils/wheel/Wheel";
 import upSvg from '../../../assets/up.svg';
+import upPng from '../../../assets/up.png';
+import clockwisePng from '../../../assets/clockwise.png';
 import clockwiseSvg from '../../../assets/clockwise.svg';
 import "../../../style/control.css";
 
@@ -83,15 +85,15 @@ function Chat() {
       <div className="sy-control-yg">
         <div className="sy-control-yg-left">
           <div className="sy-control-yg-mc">
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveForwardLeft(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{transform:'rotate(-45deg)'}} src={ upSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveForward(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" src={ upSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveForwardRight(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{transform:'rotate(45deg)'}} src={ upSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveSideways(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{transform:'rotate(-90deg)'}} src={ upSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.rotate(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{width:'35px'}} src={ clockwiseSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveSideways(isForward ? -speed : speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{transform:'rotate(90deg)'}} src={ upSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveBackwardLeft(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{transform:'rotate(-120deg)'}} src={ upSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveBackward(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{transform:'rotate(180deg)'}} src={ upSvg } alt="up" /></div>
-            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveBackwardRight(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><img className="sy-control-icon" style={{transform:'rotate(120deg)'}} src={ upSvg } alt="up" /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveForwardLeft(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{transform:'rotate(-45deg)', backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}} /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveForward(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}} /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveForwardRight(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{transform:'rotate(45deg)', backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}}  /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveSideways(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{transform:'rotate(-90deg)', backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}}  /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.rotate(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{width:'35px',height:'35px', opacity:'.65', backgroundImage: `url(${clockwisePng})`, backgroundSize: 'cover'}}  /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveSideways(isForward ? -speed : speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{transform:'rotate(90deg)', backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}}  /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveBackwardLeft(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{transform:'rotate(-120deg)', backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}}  /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveBackward(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{transform:'rotate(180deg)', backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}}  /></div>
+            <div className="sy-control-button" onTouchStart={()=>{mecanumWheel.moveBackwardRight(isForward ? speed : -speed)}} onTouchEnd={()=>{mecanumWheel.stop()}}><div className="sy-control-icon" style={{transform:'rotate(120deg)', backgroundImage: `url(${upPng})`, backgroundSize: 'cover'}}  /></div>
           </div>
         </div>
         <div className="sy-control-yg-center">
