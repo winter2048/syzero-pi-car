@@ -4,6 +4,7 @@ import { Spinner } from "@fluentui/react-components";
 // react懒加载
 const App = lazy(() => import("../pages/app"));
 const Control = lazy(() => import("../pages/app/control"));
+const Mecanum = lazy(() => import("../pages/app/mecanum"));
 const Test = lazy(() => import("../pages/app/test"));
 const Text = lazy(() => import("../pages/app/text"));
 const Setting = lazy(() => import("../pages/app/setting"));
@@ -22,6 +23,14 @@ const router: Array<RouteObject> = [
         element: (
           <React.Suspense fallback={<Spinner/>}>
             <Control />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "mecanum",
+        element: (
+          <React.Suspense fallback={<Spinner/>}>
+            <Mecanum />
           </React.Suspense>
         ),
       },

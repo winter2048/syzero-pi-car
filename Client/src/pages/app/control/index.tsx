@@ -14,6 +14,9 @@ import VirtualRocker from "../../../components/virtualRocker/virtual-rocker";
 import useSignalR from "../../../utils/useSignalR";
 import store from "../../../store";
 import {MotorHAT} from "../../../utils/constant";
+import {AckermannWheel} from "../../../utils/wheel/AckermannWheel"
+import {SteeringEngine} from "../../../utils/wheel/SteeringEngine"
+import {Wheel} from "../../../utils/wheel/Wheel"
 import "../../../style/control.css";
 
 function Chat() {
@@ -25,9 +28,12 @@ function Chat() {
     url: `${store.getState().config.SERVER_URL}/carhub`,
   });
 
-  connection?.on("ReceiveMessage", (sessions: ChatSessionDto[]) => {
-   
-  });
+  const wheel1 = new Wheel(connection, 0, true);
+  const wheel2 = new Wheel(connection, 1);
+  const wheel3 = new Wheel(connection, 2);
+  const wheel4 = new Wheel(connection, 3);
+  const steeringEngine = new SteeringEngine(connection);
+  const ackermannWheel = new AckermannWheel(wheel1, wheel2, wheel3, wheel4, steeringEngine);
 
   connection?.on("Disconnect", function () {
     setIsConnection(false);
@@ -39,67 +45,25 @@ function Chat() {
   };
 
   const onInitClick = async () => {
-    await connection?.invoke("Init");
+    await ackermannWheel.init();
     setDirection(90);
     setSpeed(0);
     setIsForward(true);
   }
 
-  const waitSeconds = (seconds: number) => {
-    return new Promise(function(resolve) {
-      setTimeout(resolve, seconds * 1000);
-    });
-  }
-
-  const testDCMotor = async (num: number) => {
-    await connection?.invoke("SetDCMotorSpeed", num, 20);
-    await connection?.invoke("SetDCMotorDirection", num, MotorHAT.FORWARD);
-    await waitSeconds(1);
-    await connection?.invoke("SetDCMotorSpeed", num, 0);
-    await connection?.invoke("SetDCMotorDirection", num, MotorHAT.RELEASE);
-  };
-
   const onTestClick = async () => {
-    await testDCMotor(0);
-    await testDCMotor(1);
-    await testDCMotor(2);
-    await testDCMotor(3);
-    await connection?.invoke("SetServoDirection", 60);
-    await waitSeconds(1);
-    await connection?.invoke("SetServoDirection", 90);
-    await waitSeconds(1);
-    await connection?.invoke("SetServoDirection", 120);
-    await waitSeconds(1);
-    await connection?.invoke("SetServoDirection", 90);
+    await ackermannWheel.test();
   };
 
   const onSpeedChange = async (x: number, y: number) => {
     setSpeed(y);
-    console.log("y", y)
   };
-
-  const run = async(speed: number) => {
-    if (connection) {
-      const all:Promise<any>[] = [];
-      all.push(connection.invoke("SetDCMotorSpeed", 0, speed));
-      all.push(connection.invoke("SetDCMotorDirection", 0,isForward? MotorHAT.FORWARD:MotorHAT.BACKWARD));
-
-      all.push(connection.invoke("SetDCMotorSpeed", 1, speed));
-      all.push(connection.invoke("SetDCMotorDirection", 1, isForward? MotorHAT.BACKWARD:MotorHAT.FORWARD));
-
-      all.push(connection.invoke("SetDCMotorSpeed", 2, speed));
-      all.push(connection.invoke("SetDCMotorDirection", 2, isForward? MotorHAT.BACKWARD:MotorHAT.FORWARD));
-
-      all.push(connection.invoke("SetDCMotorSpeed", 3, speed));
-      all.push(connection.invoke("SetDCMotorDirection", 3, isForward? MotorHAT.BACKWARD:MotorHAT.FORWARD));
-      await Promise.all(all);
-    }
-  }
 
   const onDirectionChange = async (x: number, y: number) => {
     setDirection(x);
-    console.log("x", x)
-    await connection?.invoke("SetServoDirection", x);
+    if (connection) {
+      await ackermannWheel.rotate(x);
+    }
   };
 
   const onIsForwardChange: SwitchProps["onChange"]=async (_, data) => {
@@ -108,7 +72,7 @@ function Chat() {
 
   React.useEffect(() => {
     if (connection && !loading) {
-      run(speed);
+      ackermannWheel.move(isForward ? speed : -speed);
     } 
   }, [speed, isForward]);
 

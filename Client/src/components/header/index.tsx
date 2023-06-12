@@ -39,7 +39,8 @@ export const Header = () => {
         onTabSelect={onTabSelect}
         selectedValue={tab}
       >
-        <Tab value="/control">控制</Tab>
+        <Tab value="/control">阿克曼</Tab>
+        <Tab value="/mecanum">麦克纳姆轮</Tab>
         <Tab value="/test">测试</Tab>
         <Tab value="/text">自动</Tab>
         <Tab value="/setting">设置</Tab>
