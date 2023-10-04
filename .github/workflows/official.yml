@@ -48,7 +48,7 @@ jobs:
       - name: Copy Artifact
         run: |
           Copy-Item -Path "./Client/build" -Destination "./PiCar/Client" -Recurse -Force
-          Copy-Item -Path "./Service/SyZero.PiCar.Service/bin" -Destination "./PiCar/Service" -Recurse -Force
+          Copy-Item -Path "./Service/SyZero.PiCar.Service/bin/*/net6.0" -Destination "./PiCar/Service" -Recurse -Force
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
@@ -75,5 +75,4 @@ jobs:
           token: ${{ env.GB_NUGET_TOKEN }}
           prerelease: ${{ github.ref_name != 'master' }}
           tag: v${{ env.BUILD_BUILDNUMBER }}
-          artifacts: |
-            ./PiCar/*
+          artifacts: "./PiCar"
