@@ -49,6 +49,7 @@ jobs:
         run: |
           Copy-Item -Path "./Client/build" -Destination "./PiCar/Client" -Recurse -Force
           Copy-Item -Path "./Service/SyZero.PiCar.Service/bin/*/net6.0" -Destination "./PiCar/Service" -Recurse -Force
+          Compress-Archive -Path "./PiCar" -DestinationPath "./syzero.pi.car.zip" -Force
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
@@ -75,4 +76,4 @@ jobs:
           token: ${{ env.GB_NUGET_TOKEN }}
           prerelease: ${{ github.ref_name != 'master' }}
           tag: v${{ env.BUILD_BUILDNUMBER }}
-          artifacts: "./PiCar"
+          artifacts: "./syzero.pi.car.zip"
