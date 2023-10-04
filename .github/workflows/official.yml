@@ -58,13 +58,19 @@ jobs:
         run: .\.github\workflows\script\get-releasenote.ps1 -version ${{ env.BUILD_BUILDNUMBER }}
         shell: powershell
 
+      - name: Tag commit
+        uses: tvdias/github-tagger@v0.0.1
+        with:
+          repo-token: ${{ env.GB_NUGET_TOKEN }}
+          tag: v${{ env.BUILD_BUILDNUMBER }}
+
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: |
-            ./Client/build/*
-            ./Service/SyZero.PiCar.Service/bin/*
           bodyFile: 'ReleaseNote.md'
           token: ${{ env.GB_NUGET_TOKEN }}
           prerelease: ${{ github.ref_name != 'master' }}
           tag: v${{ env.BUILD_BUILDNUMBER }}
+          artifacts: |
+            ./Client/build/*
+            ./Service/SyZero.PiCar.Service/bin/*
