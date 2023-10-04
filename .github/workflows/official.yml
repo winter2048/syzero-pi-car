@@ -45,13 +45,17 @@ jobs:
           npm install
           npm run build
 
-      - name: Upload package
+      - name: Copy Artifact
+        run: |
+          xcopy ./Client/build ./PiCar/Client /E /I /Y
+          xcopy ./Service/SyZero.PiCar.Service/bin ./PiCar/Service /E /I /Y
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: build
           path: |
-            ./Client/build/*
-            ./Service/SyZero.PiCar.Service/bin/*
+            ./PiCar/*
 
       - name: Get Release Note
         id: get_releasenote
@@ -72,5 +76,4 @@ jobs:
           prerelease: ${{ github.ref_name != 'master' }}
           tag: v${{ env.BUILD_BUILDNUMBER }}
           artifacts: |
-            ./Client/build/*
-            ./Service/SyZero.PiCar.Service/bin/*
+            ./PiCar/*
