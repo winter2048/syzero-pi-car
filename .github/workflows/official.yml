@@ -18,20 +18,53 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup BuildNumber
+        id: setup_buildnumber
+        run: .\.github\workflows\script\set-buildnumber.ps1 -refName ${{ github.ref_name }}
+        shell: powershell
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
       - name: Restore dependencies
         run: dotnet restore ./Service/SyZero.PiCar.sln
 
-      - name: Build
+      - name: Build Service
         run: dotnet build --configuration Release ./Service/SyZero.PiCar.sln --no-restore
+
+      - name: Build Client
+        run: |
+          cd ./Client
+          npm install
+          npm run build
 
       - name: Upload package
         uses: actions/upload-artifact@v3
         with:
           name: build
           path: |
+            ./Client/build/*
             ./Service/SyZero.PiCar.Service/bin/*
+
+      - name: Get Release Note
+        id: get_releasenote
+        run: .\.github\workflows\script\get-releasenote.ps1 -version ${{ env.BUILD_BUILDNUMBER }}
+        shell: powershell
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: |
+            ./Client/build/*
+            ./Service/SyZero.PiCar.Service/bin/*
+          bodyFile: 'ReleaseNote.md'
+          token: ${{ env.GB_NUGET_TOKEN }}
+          prerelease: ${{ github.ref_name != 'master' }}
+          tag: v${{ env.BUILD_BUILDNUMBER }}
