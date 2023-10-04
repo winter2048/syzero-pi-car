@@ -17,13 +17,10 @@ C#树莓派四轮小车
 #### 软件架构
 服务端使用.net6，通过websocket和客户端进行连接。
 
-#### 安装教程
+#### 安装&升级
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```
+bash <(curl -Ls https://raw.githubusercontent.com/winter2048/syzero-pi-car/master/install.sh) 
+```
 
-#### 使用说明
-
-![Alt text](./doc/image.png)
-![Alt text](./doc/image2.png)
+更多功能规划中...
