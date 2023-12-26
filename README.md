@@ -23,4 +23,9 @@ C#树莓派四轮小车
 bash <(curl -Ls https://raw.githubusercontent.com/winter2048/syzero-pi-car/master/install.sh) 
 ```
 
+#### 使用说明
+
+![Alt text](./doc/image.png)
+![Alt text](./doc/image2.png)
+
 更多功能规划中...
